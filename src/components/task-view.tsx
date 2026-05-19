@@ -178,6 +178,7 @@ export function TaskView({
             <TaskForm
               defaultView={defaultView}
               defaultDueDate={defaultDueDate}
+              defaultProjectId={defaultProjectId}
               onSubmit={async (t) => { await create.mutateAsync(t); setAdding(false); }}
               onCancel={() => setAdding(false)}
             />
