@@ -14,8 +14,11 @@ import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedUpcomingRouteImport } from './routes/_authenticated/upcoming'
 import { Route as AuthenticatedTodayRouteImport } from './routes/_authenticated/today'
+import { Route as AuthenticatedReportingRouteImport } from './routes/_authenticated/reporting'
 import { Route as AuthenticatedInboxRouteImport } from './routes/_authenticated/inbox'
 import { Route as AuthenticatedFiltersRouteImport } from './routes/_authenticated/filters'
+import { Route as AuthenticatedProjectProjectIdRouteImport } from './routes/_authenticated/project.$projectId'
+import { Route as AuthenticatedFilterFilterIdRouteImport } from './routes/_authenticated/filter.$filterId'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -41,6 +44,11 @@ const AuthenticatedTodayRoute = AuthenticatedTodayRouteImport.update({
   path: '/today',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedReportingRoute = AuthenticatedReportingRouteImport.update({
+  id: '/reporting',
+  path: '/reporting',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedInboxRoute = AuthenticatedInboxRouteImport.update({
   id: '/inbox',
   path: '/inbox',
@@ -51,22 +59,40 @@ const AuthenticatedFiltersRoute = AuthenticatedFiltersRouteImport.update({
   path: '/filters',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedProjectProjectIdRoute =
+  AuthenticatedProjectProjectIdRouteImport.update({
+    id: '/project/$projectId',
+    path: '/project/$projectId',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedFilterFilterIdRoute =
+  AuthenticatedFilterFilterIdRouteImport.update({
+    id: '/filter/$filterId',
+    path: '/filter/$filterId',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/filters': typeof AuthenticatedFiltersRoute
   '/inbox': typeof AuthenticatedInboxRoute
+  '/reporting': typeof AuthenticatedReportingRoute
   '/today': typeof AuthenticatedTodayRoute
   '/upcoming': typeof AuthenticatedUpcomingRoute
+  '/filter/$filterId': typeof AuthenticatedFilterFilterIdRoute
+  '/project/$projectId': typeof AuthenticatedProjectProjectIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/filters': typeof AuthenticatedFiltersRoute
   '/inbox': typeof AuthenticatedInboxRoute
+  '/reporting': typeof AuthenticatedReportingRoute
   '/today': typeof AuthenticatedTodayRoute
   '/upcoming': typeof AuthenticatedUpcomingRoute
+  '/filter/$filterId': typeof AuthenticatedFilterFilterIdRoute
+  '/project/$projectId': typeof AuthenticatedProjectProjectIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -75,14 +101,35 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/_authenticated/filters': typeof AuthenticatedFiltersRoute
   '/_authenticated/inbox': typeof AuthenticatedInboxRoute
+  '/_authenticated/reporting': typeof AuthenticatedReportingRoute
   '/_authenticated/today': typeof AuthenticatedTodayRoute
   '/_authenticated/upcoming': typeof AuthenticatedUpcomingRoute
+  '/_authenticated/filter/$filterId': typeof AuthenticatedFilterFilterIdRoute
+  '/_authenticated/project/$projectId': typeof AuthenticatedProjectProjectIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/filters' | '/inbox' | '/today' | '/upcoming'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/filters'
+    | '/inbox'
+    | '/reporting'
+    | '/today'
+    | '/upcoming'
+    | '/filter/$filterId'
+    | '/project/$projectId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/filters' | '/inbox' | '/today' | '/upcoming'
+  to:
+    | '/'
+    | '/login'
+    | '/filters'
+    | '/inbox'
+    | '/reporting'
+    | '/today'
+    | '/upcoming'
+    | '/filter/$filterId'
+    | '/project/$projectId'
   id:
     | '__root__'
     | '/'
@@ -90,8 +137,11 @@ export interface FileRouteTypes {
     | '/login'
     | '/_authenticated/filters'
     | '/_authenticated/inbox'
+    | '/_authenticated/reporting'
     | '/_authenticated/today'
     | '/_authenticated/upcoming'
+    | '/_authenticated/filter/$filterId'
+    | '/_authenticated/project/$projectId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -137,6 +187,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTodayRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/reporting': {
+      id: '/_authenticated/reporting'
+      path: '/reporting'
+      fullPath: '/reporting'
+      preLoaderRoute: typeof AuthenticatedReportingRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/inbox': {
       id: '/_authenticated/inbox'
       path: '/inbox'
@@ -151,21 +208,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedFiltersRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/project/$projectId': {
+      id: '/_authenticated/project/$projectId'
+      path: '/project/$projectId'
+      fullPath: '/project/$projectId'
+      preLoaderRoute: typeof AuthenticatedProjectProjectIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/filter/$filterId': {
+      id: '/_authenticated/filter/$filterId'
+      path: '/filter/$filterId'
+      fullPath: '/filter/$filterId'
+      preLoaderRoute: typeof AuthenticatedFilterFilterIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
 interface AuthenticatedRouteChildren {
   AuthenticatedFiltersRoute: typeof AuthenticatedFiltersRoute
   AuthenticatedInboxRoute: typeof AuthenticatedInboxRoute
+  AuthenticatedReportingRoute: typeof AuthenticatedReportingRoute
   AuthenticatedTodayRoute: typeof AuthenticatedTodayRoute
   AuthenticatedUpcomingRoute: typeof AuthenticatedUpcomingRoute
+  AuthenticatedFilterFilterIdRoute: typeof AuthenticatedFilterFilterIdRoute
+  AuthenticatedProjectProjectIdRoute: typeof AuthenticatedProjectProjectIdRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedFiltersRoute: AuthenticatedFiltersRoute,
   AuthenticatedInboxRoute: AuthenticatedInboxRoute,
+  AuthenticatedReportingRoute: AuthenticatedReportingRoute,
   AuthenticatedTodayRoute: AuthenticatedTodayRoute,
   AuthenticatedUpcomingRoute: AuthenticatedUpcomingRoute,
+  AuthenticatedFilterFilterIdRoute: AuthenticatedFilterFilterIdRoute,
+  AuthenticatedProjectProjectIdRoute: AuthenticatedProjectProjectIdRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
@@ -180,3 +257,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
