@@ -14,6 +14,102 @@ export type Database = {
   }
   public: {
     Tables: {
+      filters: {
+        Row: {
+          color: string
+          created_at: string
+          id: string
+          is_favorite: boolean
+          name: string
+          query: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          color?: string
+          created_at?: string
+          id?: string
+          is_favorite?: boolean
+          name: string
+          query?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          color?: string
+          created_at?: string
+          id?: string
+          is_favorite?: boolean
+          name?: string
+          query?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      labels: {
+        Row: {
+          color: string
+          created_at: string
+          id: string
+          is_favorite: boolean
+          name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          color?: string
+          created_at?: string
+          id?: string
+          is_favorite?: boolean
+          name: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          color?: string
+          created_at?: string
+          id?: string
+          is_favorite?: boolean
+          name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      projects: {
+        Row: {
+          color: string
+          created_at: string
+          emoji: string | null
+          id: string
+          is_favorite: boolean
+          name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          color?: string
+          created_at?: string
+          emoji?: string | null
+          id?: string
+          is_favorite?: boolean
+          name: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          color?: string
+          created_at?: string
+          emoji?: string | null
+          id?: string
+          is_favorite?: boolean
+          name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       tasks: {
         Row: {
           completed: boolean
@@ -23,6 +119,7 @@ export type Database = {
           id: string
           label: string | null
           priority: number
+          project_id: string | null
           title: string
           updated_at: string
           user_id: string
@@ -36,6 +133,7 @@ export type Database = {
           id?: string
           label?: string | null
           priority?: number
+          project_id?: string | null
           title: string
           updated_at?: string
           user_id: string
@@ -49,12 +147,21 @@ export type Database = {
           id?: string
           label?: string | null
           priority?: number
+          project_id?: string | null
           title?: string
           updated_at?: string
           user_id?: string
           view?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
