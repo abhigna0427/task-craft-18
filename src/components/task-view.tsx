@@ -15,7 +15,9 @@ export function TaskView({
   filter,
   defaultView = "inbox",
   defaultDueDate,
+  defaultProjectId,
   groupByDate = false,
+  headerExtra,
 }: {
   title: string;
   emptyTitle: string;
@@ -23,7 +25,9 @@ export function TaskView({
   filter: (t: Task) => boolean;
   defaultView?: string;
   defaultDueDate?: string;
+  defaultProjectId?: string | null;
   groupByDate?: boolean;
+  headerExtra?: React.ReactNode;
 }) {
   const qc = useQueryClient();
   const { data: all = [], isLoading } = useQuery({ queryKey: ["tasks"], queryFn: fetchTasks });
