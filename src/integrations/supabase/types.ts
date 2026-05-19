@@ -14,7 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      tasks: {
+        Row: {
+          completed: boolean
+          created_at: string
+          description: string | null
+          due_date: string | null
+          id: string
+          label: string | null
+          priority: number
+          title: string
+          updated_at: string
+          user_id: string
+          view: string
+        }
+        Insert: {
+          completed?: boolean
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          label?: string | null
+          priority?: number
+          title: string
+          updated_at?: string
+          user_id: string
+          view?: string
+        }
+        Update: {
+          completed?: boolean
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          label?: string | null
+          priority?: number
+          title?: string
+          updated_at?: string
+          user_id?: string
+          view?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
