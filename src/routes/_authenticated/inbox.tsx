@@ -7,7 +7,7 @@ export const Route = createFileRoute("/_authenticated/inbox")({
       title="Inbox"
       emptyTitle="Capture now, plan later"
       emptyDescription="Inbox is your go-to spot for quick task entry. Clear your mind now, organize when you're ready."
-      filter={() => true}
+      filter={(t) => !t.project_id}
       defaultView="inbox"
     />
   ),

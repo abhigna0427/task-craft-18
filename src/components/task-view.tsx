@@ -15,7 +15,9 @@ export function TaskView({
   filter,
   defaultView = "inbox",
   defaultDueDate,
+  defaultProjectId,
   groupByDate = false,
+  headerExtra,
 }: {
   title: string;
   emptyTitle: string;
@@ -23,7 +25,9 @@ export function TaskView({
   filter: (t: Task) => boolean;
   defaultView?: string;
   defaultDueDate?: string;
+  defaultProjectId?: string | null;
   groupByDate?: boolean;
+  headerExtra?: React.ReactNode;
 }) {
   const qc = useQueryClient();
   const { data: all = [], isLoading } = useQuery({ queryKey: ["tasks"], queryFn: fetchTasks });
@@ -89,6 +93,7 @@ export function TaskView({
       <div className="max-w-3xl mx-auto px-4 sm:px-8 py-8">
         <header className="mb-4 flex items-center justify-between gap-4">
           <h1 className="text-2xl font-bold">{title}</h1>
+          {headerExtra}
         </header>
 
         <div className="flex flex-col sm:flex-row gap-2 mb-4">
@@ -173,6 +178,7 @@ export function TaskView({
             <TaskForm
               defaultView={defaultView}
               defaultDueDate={defaultDueDate}
+              defaultProjectId={defaultProjectId}
               onSubmit={async (t) => { await create.mutateAsync(t); setAdding(false); }}
               onCancel={() => setAdding(false)}
             />
