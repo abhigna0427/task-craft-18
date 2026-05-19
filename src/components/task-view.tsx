@@ -93,6 +93,7 @@ export function TaskView({
       <div className="max-w-3xl mx-auto px-4 sm:px-8 py-8">
         <header className="mb-4 flex items-center justify-between gap-4">
           <h1 className="text-2xl font-bold">{title}</h1>
+          {headerExtra}
         </header>
 
         <div className="flex flex-col sm:flex-row gap-2 mb-4">
