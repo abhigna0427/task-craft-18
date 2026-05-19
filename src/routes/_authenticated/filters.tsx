@@ -3,6 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchTasks } from "@/lib/tasks";
 import { Flag, Tag } from "lucide-react";
 
+const priorityColor: Record<number, string> = {
+  1: "text-priority-1",
+  2: "text-priority-2",
+  3: "text-priority-3",
+  4: "text-priority-4",
+};
+
 export const Route = createFileRoute("/_authenticated/filters")({
   component: FiltersPage,
 });
@@ -23,7 +30,7 @@ function FiltersPage() {
             {counts.map(({ p, n }) => (
               <Link key={p} to="/inbox" className="flex items-center justify-between px-4 py-3 hover:bg-muted/50 transition">
                 <span className="flex items-center gap-2 text-sm">
-                  <Flag className={`h-4 w-4 text-priority-${p}`} /> Priority {p}
+                  <Flag className={`h-4 w-4 ${priorityColor[p]}`} /> Priority {p}
                 </span>
                 <span className="text-xs text-muted-foreground">{n}</span>
               </Link>
